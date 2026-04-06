@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SplashKing Car Wash — Shine Like Royalty</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#00eaff;
+  --blue:#0066ff;
+  --deep:#001233;
+  --gold:#ffd166;
+  --pink:#ff3d81;
+  --white:#f5fbff;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--deep);
+  color:var(--white);
+  overflow-x:hidden;
+}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 6%;
+  backdrop-filter:blur(14px);
+  background:rgba(0,18,51,0.6);
+  border-bottom:1px solid rgba(0,234,255,0.2);
+}
+.logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2rem;letter-spacing:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--gold));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  display:flex;align-items:center;gap:8px;
+}
+.logo::before{
+  content:"";width:34px;height:34px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%,#fff,var(--cyan) 60%,var(--blue));
+  box-shadow:0 0 20px var(--cyan);
+  animation:bubble 3s ease-in-out infinite;
+}
+nav ul{display:flex;gap:32px;list-style:none;}
+nav ul a{
+  color:var(--white);text-decoration:none;font-weight:500;font-size:.95rem;
+  position:relative;transition:.3s;
+}
+nav ul a::after{
+  content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;
+  background:var(--cyan);transition:.3s;
+}
+nav ul a:hover{color:var(--cyan);}
+nav ul a:hover::after{width:100%;}
+.book-btn{
+  padding:10px 22px;border:none;border-radius:30px;cursor:pointer;
+  background:linear-gradient(90deg,var(--cyan),var(--blue));
+  color:#fff;font-weight:700;letter-spacing:1px;
+  box-shadow:0 0 20px rgba(0,234,255,.5);
+  transition:transform .3s;
+}
+.book-btn:hover{transform:scale(1.08);}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;overflow:hidden;
+  background:
+    radial-gradient(ellipse at 20% 30%,rgba(0,234,255,.25),transparent 60%),
+    radial-gradient(ellipse at 80% 70%,rgba(255,61,129,.2),transparent 60%),
+    linear-gradient(180deg,#001233 0%,#002b5c 100%);
+}
+.hero h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3rem,9vw,8rem);
+  letter-spacing:4px;line-height:.9;
+  background:linear-gradient(90deg,#fff,var(--cyan),var(--gold),#fff);
+  background-size:300% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:shine 5s linear infinite;
+  text-shadow:0 0 40px rgba(0,234,255,.3);
+}
+.hero p.tagline{
+  font-size:clamp(1rem,1.6vw,1.3rem);
+  margin:20px 0 36px;opacity:.9;letter-spacing:2px;
+}
+.hero .cta-row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
+.ghost-btn{
+  padding:14px 32px;border-radius:30px;cursor:pointer;
+  background:transparent;color:var(--white);
+  border:2px solid var(--cyan);font-weight:600;letter-spacing:1px;
+  transition:.3s;
+}
+.ghost-btn:hover{background:var(--cyan);color:var(--deep);box-shadow:0 0 25px var(--cyan);}
+
+/* Car driving across */
+.car-scene{
+  position:absolute;bottom:10%;left:0;width:100%;height:180px;
+  pointer-events:none;
+}
+.road{
+  position:absolute;bottom:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+  box-shadow:0 0 20px var(--cyan);
+}
+.car{
+  position:absolute;bottom:10px;left:-300px;
+  font-size:5rem;
+  animation:drive 9s linear infinite;
+  filter:drop-shadow(0 0 18px var(--cyan));
+}
+@keyframes drive{
+  0%{left:-300px;transform:translateY(0);}
+  45%{transform:translateY(-4px);}
+  50%{transform:translateY(0);}
+  100%{left:110%;}
+}
+
+/* Bubbles */
+.bubbles{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.bubble{
+  position:absolute;bottom:-100px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.9),rgba(0,234,255,.3) 60%,transparent);
+  box-shadow:inset 0 0 10px rgba(255,255,255,.6),0 0 15px rgba(0,234,255,.4);
+  animation:rise linear infinite;
+}
+@keyframes rise{
+  0%{transform:translateY(0) translateX(0);opacity:0;}
+  10%{opacity:1;}
+  90%{opacity:.8;}
+  100%{transform:translateY(-110vh) translateX(40px);opacity:0;}
+}
+@keyframes bubble{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-4px);}
+}
+@keyframes shine{
+  0%{background-position:0% 0;}
+  100%{background-position:300% 0;}
+}
+
+/* ---------- SECTIONS ---------- */
+section{padding:120px 6%;position:relative;}
+.section-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.5rem,5vw,4.5rem);
+  text-align:center;letter-spacing:3px;
+  margin-bottom:12px;
+  background:linear-gradient(90deg,var(--cyan),var(--gold));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.section-sub{text-align:center;opacity:.8;margin-bottom:60px;letter-spacing:1px;}
+
+/* ---------- PACKAGES ---------- */
+#packages{background:linear-gradient(180deg,#002b5c,#001233);}
+.packages{
+  display:grid;gap:30px;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  max-width:1300px;margin:0 auto;
+}
+.pkg{
+  position:relative;
+  padding:40px 30px;border-radius:24px;
+  background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(0,234,255,.03));
+  border:1px solid rgba(0,234,255,.25);
+  backdrop-filter:blur(10px);
+  transition:transform .5s,box-shadow .5s;
+  overflow:hidden;
+  opacity:0;transform:translateY(40px);
+}
+.pkg.show{opacity:1;transform:translateY(0);}
+.pkg:hover{
+  transform:translateY(-14px) scale(1.02);
+  box-shadow:0 20px 60px rgba(0,234,255,.35);
+  border-color:var(--cyan);
+}
+.pkg::before{
+  content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+  background:conic-gradient(from 0deg,transparent,rgba(0,234,255,.15),transparent 30%);
+  animation:spin 6s linear infinite;opacity:0;transition:.4s;
+}
+.pkg:hover::before{opacity:1;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.pkg > *{position:relative;z-index:1;}
+.pkg h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2rem;letter-spacing:2px;margin-bottom:6px;
+}
+.pkg .price{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:3.5rem;color:var(--cyan);
+  text-shadow:0 0 20px rgba(0,234,255,.6);
+}
+.pkg .price span{font-size:1rem;opacity:.6;}
+.pkg ul{list-style:none;margin-top:20px;}
+.pkg ul li{
+  padding:10px 0;border-bottom:1px dashed rgba(255,255,255,.1);
+  display:flex;align-items:center;gap:10px;font-size:.95rem;
+}
+.pkg ul li::before{
+  content:"✓";color:var(--cyan);font-weight:bold;
+  background:rgba(0,234,255,.15);
+  width:22px;height:22px;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;font-size:.8rem;
+}
+.pkg .pkg-btn{
+  margin-top:24px;width:100%;padding:14px;
+  border:none;border-radius:12px;cursor:pointer;
+  background:linear-gradient(90deg,var(--cyan),var(--blue));
+  color:#fff;font-weight:700;letter-spacing:1px;
+  transition:.3s;
+}
+.pkg .pkg-btn:hover{box-shadow:0 0 25px var(--cyan);}
+.pkg.featured{
+  border-color:var(--gold);
+  background:linear-gradient(160deg,rgba(255,209,102,.12),rgba(255,61,129,.06));
+}
+.pkg.featured .price{color:var(--gold);text-shadow:0 0 20px rgba(255,209,102,.6);}
+.pkg.featured .pkg-btn{background:linear-gradient(90deg,var(--gold),var(--pink));}
+.pkg .badge{
+  position:absolute;top:18px;right:-36px;
+  background:var(--gold);color:#001233;
+  padding:5px 44px;font-size:.75rem;font-weight:800;letter-spacing:1px;
+  transform:rotate(45deg);
+}
+
+/* ---------- ABOUT / CONTACT / LOCATION ---------- */
+#info{
+  background:linear-gradient(180deg,#001233,#00091f);
+}
+.info-grid{
+  display:grid;gap:30px;max-width:1200px;margin:0 auto;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+}
+.info-card{
+  padding:40px 30px;border-radius:20px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(0,234,255,.2);
+  text-align:center;transition:.4s;
+}
+.info-card:hover{transform:translateY(-8px);border-color:var(--cyan);box-shadow:0 15px 40px rgba(0,234,255,.25);}
+.info-card .icon{
+  font-size:3rem;margin-bottom:16px;
+  display:inline-block;
+  animation:float 4s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.info-card h3{font-family:'Bebas Neue',sans-serif;letter-spacing:2px;font-size:1.6rem;color:var(--cyan);margin-bottom:12px;}
+.info-card p,.info-card a{color:var(--white);opacity:.85;line-height:1.7;text-decoration:none;font-size:.95rem;}
+.info-card a:hover{color:var(--cyan);}
+
+/* ---------- BOOKING ---------- */
+#book{background:linear-gradient(180deg,#00091f,#001233);}
+.booking-form{
+  max-width:650px;margin:0 auto;
+  padding:50px;border-radius:24px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(0,234,255,.25);
+  backdrop-filter:blur(10px);
+}
+.booking-form .row{display:grid;gap:18px;grid-template-columns:1fr 1fr;margin-bottom:18px;}
+.booking-form input,.booking-form select{
+  width:100%;padding:14px 16px;border-radius:10px;
+  background:rgba(0,0,0,.3);border:1px solid rgba(0,234,255,.3);
+  color:var(--white);font-size:1rem;
+}
+.booking-form input:focus,.booking-form select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 15px rgba(0,234,255,.4);}
+.booking-form .full{grid-column:1/-1;}
+.booking-form button{
+  width:100%;margin-top:10px;padding:16px;border:none;border-radius:12px;cursor:pointer;
+  background:linear-gradient(90deg,var(--cyan),var(--blue));
+  color:#fff;font-weight:700;font-size:1.1rem;letter-spacing:2px;
+  box-shadow:0 0 25px rgba(0,234,255,.4);transition:.3s;
+}
+.booking-form button:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,234,255,.6);}
+
+footer{
+  text-align:center;padding:40px 20px;
+  background:#00060f;border-top:1px solid rgba(0,234,255,.15);
+  font-size:.9rem;opacity:.7;
+}
+
+@media(max-width:720px){
+  nav ul{display:none;}
+  .booking-form{padding:30px 20px;}
+  .booking-form .row{grid-template-columns:1fr;}
+  section{padding:90px 6%;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">SplashKing</div>
+  <ul>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#info">Location</a></li>
+    <li><a href="#info">Contact</a></li>
+    <li><a href="#book">Book</a></li>
+  </ul>
+  <button class="book-btn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">BOOK NOW</button>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="bubbles" id="bubbles"></div>
+  <div style="position:relative;z-index:2;padding:0 20px;">
+    <h1>SHINE LIKE<br>ROYALTY</h1>
+    <p class="tagline">★ PREMIUM CAR WASH &nbsp;•&nbsp; LIGHTNING FAST &nbsp;•&nbsp; ECO FRIENDLY ★</p>
+    <div class="cta-row">
+      <button class="book-btn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">BOOK YOUR WASH</button>
+      <button class="ghost-btn" onclick="document.getElementById('packages').scrollIntoView({behavior:'smooth'})">VIEW PACKAGES</button>
+    </div>
+  </div>
+  <div class="car-scene">
+    <div class="car">🚗</div>
+    <div class="road"></div>
+  </div>
+</header>
+
+<!-- PACKAGES -->
+<section id="packages">
+  <h2 class="section-title">Choose Your Shine</h2>
+  <p class="section-sub">Transparent pricing • No hidden fees • 100% satisfaction guaranteed</p>
+  <div class="packages">
+
+    <div class="pkg">
+      <h3>EXPRESS</h3>
+      <div class="price">$12<span>/wash</span></div>
+      <ul>
+        <li>Exterior foam wash</li>
+        <li>High-pressure rinse</li>
+        <li>Spot-free finish</li>
+        <li>Power air dry</li>
+        <li>10 minute service</li>
+      </ul>
+      <button class="pkg-btn" onclick="selectPkg('Express')">Select Express</button>
+    </div>
+
+    <div class="pkg">
+      <h3>DELUXE</h3>
+      <div class="price">$22<span>/wash</span></div>
+      <ul>
+        <li>Everything in Express</li>
+        <li>Triple-foam conditioner</li>
+        <li>Tire shine &amp; wheel clean</li>
+        <li>Undercarriage rinse</li>
+        <li>Clear-coat protectant</li>
+        <li>Rain repellent</li>
+      </ul>
+      <button class="pkg-btn" onclick="selectPkg('Deluxe')">Select Deluxe</button>
+    </div>
+
+    <div class="pkg featured">
+      <div class="badge">BEST VALUE</div>
+      <h3>ROYAL</h3>
+      <div class="price">$35<span>/wash</span></div>
+      <ul>
+        <li>Everything in Deluxe</li>
+        <li>Hand-applied carnauba wax</li>
+        <li>Interior vacuum &amp; wipe</li>
+        <li>Dashboard conditioner</li>
+        <li>Window cleaning in &amp; out</li>
+        <li>Air freshener of choice</li>
+        <li>Ceramic spray coating</li>
+      </ul>
+      <button class="pkg-btn" onclick="selectPkg('Royal')">Go Royal</button>
+    </div>
+
+    <div class="pkg">
+      <h3>ULTIMATE</h3>
+      <div class="price">$59<span>/wash</span></div>
+      <ul>
+        <li>Everything in Royal</li>
+        <li>Full interior detail</li>
+        <li>Leather conditioning</li>
+        <li>Engine bay cleaning</li>
+        <li>Headlight restoration</li>
+        <li>Clay bar treatment</li>
+        <li>6-month paint sealant</li>
+      </ul>
+      <button class="pkg-btn" onclick="selectPkg('Ultimate')">Go Ultimate</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- INFO -->
+<section id="info">
+  <h2 class="section-title">Find &amp; Reach Us</h2>
+  <p class="section-sub">We're open 7 days a week, rain or shine</p>
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="icon">📍</div>
+      <h3>Location</h3>
+      <p>1420 Sparkle Avenue<br>Shinetown, CA 90210<br><br>Right off Exit 42, next to the Shell station</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">📞</div>
+      <h3>Contact</h3>
+      <p>
+        <a href="tel:+15551234567">(555) 123-4567</a><br>
+        <a href="mailto:hello@splashking.com">hello@splashking.com</a><br><br>
+        We respond in under 1 hour!
+      </p>
+    </div>
+    <div class="info-card">
+      <div class="icon">⏰</div>
+      <h3>Hours</h3>
+      <p>Mon – Fri: 7am – 9pm<br>Saturday: 8am – 8pm<br>Sunday: 9am – 6pm<br><br>Holiday hours may vary</p>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section id="book">
+  <h2 class="section-title">Book Your Wash</h2>
+  <p class="section-sub">Takes less than 60 seconds</p>
+  <form class="booking-form" onsubmit="event.preventDefault();alert('Thanks! We\\'ll confirm your booking shortly.');">
+    <div class="row">
+      <input type="text" placeholder="Full Name" required>
+      <input type="tel" placeholder="Phone Number" required>
+    </div>
+    <div class="row">
+      <input type="email" class="full" placeholder="Email Address" required>
+    </div>
+    <div class="row">
+      <select id="pkgSelect" required>
+        <option value="">Choose Package</option>
+        <option>Express — $12</option>
+        <option>Deluxe — $22</option>
+        <option>Royal — $35</option>
+        <option>Ultimate — $59</option>
+      </select>
+      <input type="datetime-local" required>
+    </div>
+    <div class="row">
+      <input type="text" class="full" placeholder="Vehicle make &amp; model">
+    </div>
+    <button type="submit">CONFIRM BOOKING</button>
+  </form>
+</section>
+
+<footer>
+  © 2026 SplashKing Car Wash • Crafted with 💧 in Shinetown, CA
+</footer>
+
+<script>
+/* Bubbles */
+const bw=document.getElementById('bubbles');
+for(let i=0;i<25;i++){
+  const b=document.createElement('div');
+  b.className='bubble';
+  const size=8+Math.random()*40;
+  b.style.width=b.style.height=size+'px';
+  b.style.left=Math.random()*100+'%';
+  b.style.animationDuration=(6+Math.random()*10)+'s';
+  b.style.animationDelay=(Math.random()*8)+'s';
+  bw.appendChild(b);
+}
+
+/* Reveal on scroll */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show');}),{threshold:.15});
+document.querySelectorAll('.pkg').forEach(el=>io.observe(el));
+
+/* Package select */
+function selectPkg(name){
+  const sel=document.getElementById('pkgSelect');
+  for(const o of sel.options){if(o.text.startsWith(name)){sel.value=o.value;break;}}
+  document.getElementById('book').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
