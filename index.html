@@ -3,469 +3,566 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SplashKing Car Wash — Shine Like Royalty</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<title>SplashKing Car Wash — Premium Wash &amp; Detail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --cyan:#00eaff;
-  --blue:#0066ff;
-  --deep:#001233;
-  --gold:#ffd166;
-  --pink:#ff3d81;
-  --white:#f5fbff;
+  --bg-deep:#050506;
+  --bg-surface:#0a0a0a;
+  --bg-card:#141416;
+  --bg-card-hover:#1a1a1d;
+  --bg-elevated:#222228;
+  --border:#27272a;
+  --border-subtle:#1f1f23;
+  --text-primary:#fafafa;
+  --text-secondary:#a1a1aa;
+  --text-muted:#71717a;
+  --accent:#10b981;
+  --accent-hover:#34d399;
+  --accent-subtle:rgba(16,185,129,.1);
+  --accent-glow:rgba(16,185,129,.25);
+  --error:#f87171;
+  --warning:#fbbf24;
+  --font-display:'Space Grotesk',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --radius-md:10px;
+  --radius-lg:14px;
+  --shadow-card:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
 }
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{
-  background:var(--deep);
-  color:var(--white);
+  font-family:var(--font-body);
+  background:var(--bg-deep);
+  color:var(--text-primary);
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
+::selection{background:var(--accent-subtle);color:var(--accent-hover);}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes fade-up{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.animate-in{opacity:0;animation:fade-up .5s cubic-bezier(.21,.61,.35,1) forwards;}
+.stagger-1{animation-delay:.05s}.stagger-2{animation-delay:.1s}.stagger-3{animation-delay:.15s}
+.stagger-4{animation-delay:.2s}.stagger-5{animation-delay:.25s}.stagger-6{animation-delay:.3s}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s cubic-bezier(.21,.61,.35,1);}
+.reveal.show{opacity:1;transform:translateY(0);}
 
 /* ---------- NAV ---------- */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;justify-content:space-between;align-items:center;
-  padding:18px 6%;
-  backdrop-filter:blur(14px);
-  background:rgba(0,18,51,0.6);
-  border-bottom:1px solid rgba(0,234,255,0.2);
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 24px;
+  background:rgba(5,5,6,.8);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border-subtle);
 }
+.nav-inner{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1120px;margin:0 auto;}
 .logo{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:2rem;letter-spacing:2px;
-  background:linear-gradient(90deg,var(--cyan),var(--gold));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  display:flex;align-items:center;gap:8px;
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--font-display);font-weight:700;font-size:1.05rem;
+  letter-spacing:-.01em;color:var(--text-primary);text-decoration:none;
 }
-.logo::before{
-  content:"";width:34px;height:34px;border-radius:50%;
-  background:radial-gradient(circle at 30% 30%,#fff,var(--cyan) 60%,var(--blue));
-  box-shadow:0 0 20px var(--cyan);
-  animation:bubble 3s ease-in-out infinite;
+.logo-mark{
+  width:28px;height:28px;border-radius:8px;
+  background:linear-gradient(135deg,var(--accent),#34d399);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;color:var(--bg-surface);
+  box-shadow:0 0 16px var(--accent-glow);
 }
-nav ul{display:flex;gap:32px;list-style:none;}
+nav ul{display:flex;gap:4px;list-style:none;}
 nav ul a{
-  color:var(--white);text-decoration:none;font-weight:500;font-size:.95rem;
-  position:relative;transition:.3s;
+  color:var(--text-secondary);text-decoration:none;
+  font-size:.85rem;font-weight:500;
+  padding:7px 12px;border-radius:8px;
+  transition:color .15s,background .15s;
 }
-nav ul a::after{
-  content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;
-  background:var(--cyan);transition:.3s;
+nav ul a:hover{color:var(--text-primary);background:var(--bg-card);}
+
+/* ---------- BUTTONS ---------- */
+.sc-btn-primary{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:9px 16px;border:none;border-radius:var(--radius-md);cursor:pointer;
+  background:var(--accent);color:var(--bg-surface);
+  font-family:var(--font-body);font-size:.875rem;font-weight:600;
+  transition:background .15s,transform .15s;
 }
-nav ul a:hover{color:var(--cyan);}
-nav ul a:hover::after{width:100%;}
-.book-btn{
-  padding:10px 22px;border:none;border-radius:30px;cursor:pointer;
-  background:linear-gradient(90deg,var(--cyan),var(--blue));
-  color:#fff;font-weight:700;letter-spacing:1px;
-  box-shadow:0 0 20px rgba(0,234,255,.5);
-  transition:transform .3s;
+.sc-btn-primary:hover{background:var(--accent-hover);}
+.sc-btn-secondary{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:9px 16px;border-radius:var(--radius-md);cursor:pointer;
+  background:var(--bg-card);color:var(--text-primary);
+  border:1px solid var(--border);
+  font-family:var(--font-body);font-size:.875rem;font-weight:500;
+  text-decoration:none;
+  transition:background .15s,border-color .15s;
 }
-.book-btn:hover{transform:scale(1.08);}
+.sc-btn-secondary:hover{background:var(--bg-card-hover);border-color:#3f3f46;}
+.btn-lg{padding:12px 22px;font-size:.95rem;border-radius:var(--radius-md);}
 
 /* ---------- HERO ---------- */
 .hero{
-  position:relative;min-height:100vh;
-  display:flex;align-items:center;justify-content:center;
-  text-align:center;overflow:hidden;
+  position:relative;
+  padding:160px 24px 80px;
   background:
-    radial-gradient(ellipse at 20% 30%,rgba(0,234,255,.25),transparent 60%),
-    radial-gradient(ellipse at 80% 70%,rgba(255,61,129,.2),transparent 60%),
-    linear-gradient(180deg,#001233 0%,#002b5c 100%);
+    radial-gradient(ellipse 60% 45% at 50% -5%,rgba(16,185,129,.12),transparent 70%),
+    var(--bg-deep);
+  border-bottom:1px solid var(--border-subtle);
 }
+.hero-inner{max-width:1120px;margin:0 auto;text-align:center;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 12px;border-radius:999px;
+  background:var(--accent-subtle);
+  border:1px solid rgba(16,185,129,.2);
+  color:var(--accent-hover);
+  font-size:.75rem;font-weight:500;letter-spacing:.02em;
+  margin-bottom:24px;
+}
+.hero-badge .dot{
+  width:6px;height:6px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 8px var(--accent);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
 .hero h1{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(3rem,9vw,8rem);
-  letter-spacing:4px;line-height:.9;
-  background:linear-gradient(90deg,#fff,var(--cyan),var(--gold),#fff);
-  background-size:300% 100%;
+  font-family:var(--font-display);
+  font-size:clamp(2.4rem,5.5vw,4rem);
+  font-weight:700;letter-spacing:-.03em;line-height:1.08;
+  margin-bottom:20px;
+}
+.hero h1 .accent{
+  background:linear-gradient(90deg,var(--accent),#34d399);
   -webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:shine 5s linear infinite;
-  text-shadow:0 0 40px rgba(0,234,255,.3);
 }
-.hero p.tagline{
-  font-size:clamp(1rem,1.6vw,1.3rem);
-  margin:20px 0 36px;opacity:.9;letter-spacing:2px;
+.hero p.sub{
+  max-width:560px;margin:0 auto 32px;
+  color:var(--text-secondary);font-size:1.05rem;
 }
-.hero .cta-row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
-.ghost-btn{
-  padding:14px 32px;border-radius:30px;cursor:pointer;
-  background:transparent;color:var(--white);
-  border:2px solid var(--cyan);font-weight:600;letter-spacing:1px;
-  transition:.3s;
-}
-.ghost-btn:hover{background:var(--cyan);color:var(--deep);box-shadow:0 0 25px var(--cyan);}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
 
-/* Car driving across */
-.car-scene{
-  position:absolute;bottom:10%;left:0;width:100%;height:180px;
-  pointer-events:none;
+/* Stat row */
+.stat-row{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+  max-width:880px;margin:64px auto 0;
 }
-.road{
-  position:absolute;bottom:0;left:0;right:0;height:4px;
-  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
-  box-shadow:0 0 20px var(--cyan);
+.stat-tile{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:20px 16px;text-align:center;
 }
-.car{
-  position:absolute;bottom:10px;left:-300px;
-  font-size:5rem;
-  animation:drive 9s linear infinite;
-  filter:drop-shadow(0 0 18px var(--cyan));
+.stat-tile .value{
+  font-family:var(--font-mono);font-weight:600;
+  font-size:1.5rem;color:var(--text-primary);letter-spacing:-.02em;
 }
-@keyframes drive{
-  0%{left:-300px;transform:translateY(0);}
-  45%{transform:translateY(-4px);}
-  50%{transform:translateY(0);}
-  100%{left:110%;}
-}
-
-/* Bubbles */
-.bubbles{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
-.bubble{
-  position:absolute;bottom:-100px;border-radius:50%;
-  background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.9),rgba(0,234,255,.3) 60%,transparent);
-  box-shadow:inset 0 0 10px rgba(255,255,255,.6),0 0 15px rgba(0,234,255,.4);
-  animation:rise linear infinite;
-}
-@keyframes rise{
-  0%{transform:translateY(0) translateX(0);opacity:0;}
-  10%{opacity:1;}
-  90%{opacity:.8;}
-  100%{transform:translateY(-110vh) translateX(40px);opacity:0;}
-}
-@keyframes bubble{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-4px);}
-}
-@keyframes shine{
-  0%{background-position:0% 0;}
-  100%{background-position:300% 0;}
+.stat-tile .value em{font-style:normal;color:var(--accent);}
+.stat-tile .label{
+  font-size:.75rem;color:var(--text-muted);
+  margin-top:4px;text-transform:uppercase;letter-spacing:.06em;font-weight:500;
 }
 
 /* ---------- SECTIONS ---------- */
-section{padding:120px 6%;position:relative;}
-.section-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(2.5rem,5vw,4.5rem);
-  text-align:center;letter-spacing:3px;
-  margin-bottom:12px;
-  background:linear-gradient(90deg,var(--cyan),var(--gold));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
+section{padding:88px 24px;}
+.section-inner{max-width:1120px;margin:0 auto;}
+.section-head{margin-bottom:40px;}
+.eyebrow{
+  font-family:var(--font-mono);font-size:.75rem;font-weight:500;
+  color:var(--accent);text-transform:uppercase;letter-spacing:.1em;
+  margin-bottom:10px;
 }
-.section-sub{text-align:center;opacity:.8;margin-bottom:60px;letter-spacing:1px;}
+.section-title{
+  font-family:var(--font-display);
+  font-size:clamp(1.6rem,3vw,2.2rem);
+  font-weight:700;letter-spacing:-.02em;line-height:1.15;
+}
+.section-sub{color:var(--text-secondary);margin-top:10px;max-width:520px;}
 
 /* ---------- PACKAGES ---------- */
-#packages{background:linear-gradient(180deg,#002b5c,#001233);}
+#packages{background:var(--bg-surface);border-bottom:1px solid var(--border-subtle);}
 .packages{
-  display:grid;gap:30px;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  max-width:1300px;margin:0 auto;
+  display:grid;gap:16px;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
 }
-.pkg{
+.sc-card{
   position:relative;
-  padding:40px 30px;border-radius:24px;
-  background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(0,234,255,.03));
-  border:1px solid rgba(0,234,255,.25);
-  backdrop-filter:blur(10px);
-  transition:transform .5s,box-shadow .5s;
-  overflow:hidden;
-  opacity:0;transform:translateY(40px);
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:24px;
+  box-shadow:var(--shadow-card);
+  display:flex;flex-direction:column;
+  transition:border-color .2s,background .2s,transform .2s;
 }
-.pkg.show{opacity:1;transform:translateY(0);}
-.pkg:hover{
-  transform:translateY(-14px) scale(1.02);
-  box-shadow:0 20px 60px rgba(0,234,255,.35);
-  border-color:var(--cyan);
+.sc-card:hover{border-color:#3f3f46;background:var(--bg-card-hover);transform:translateY(-2px);}
+.sc-card.featured{border-color:rgba(16,185,129,.45);}
+.sc-card.featured:hover{border-color:var(--accent);}
+.sc-card .plan-badge{
+  position:absolute;top:-11px;right:16px;
+  padding:3px 10px;border-radius:999px;
+  background:var(--accent);color:var(--bg-surface);
+  font-size:.68rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
 }
-.pkg::before{
-  content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;
-  background:conic-gradient(from 0deg,transparent,rgba(0,234,255,.15),transparent 30%);
-  animation:spin 6s linear infinite;opacity:0;transition:.4s;
+.pkg-name{
+  font-family:var(--font-display);font-size:1rem;font-weight:600;
+  letter-spacing:-.01em;
 }
-.pkg:hover::before{opacity:1;}
-@keyframes spin{to{transform:rotate(360deg);}}
-.pkg > *{position:relative;z-index:1;}
-.pkg h3{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:2rem;letter-spacing:2px;margin-bottom:6px;
+.pkg-desc{font-size:.8rem;color:var(--text-muted);margin-top:2px;}
+.pkg-price{
+  font-family:var(--font-mono);
+  font-size:2rem;font-weight:600;letter-spacing:-.03em;
+  margin:16px 0 4px;
 }
-.pkg .price{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:3.5rem;color:var(--cyan);
-  text-shadow:0 0 20px rgba(0,234,255,.6);
+.pkg-price span{font-size:.8rem;font-weight:400;color:var(--text-muted);letter-spacing:0;}
+.sc-card.featured .pkg-price{color:var(--accent-hover);}
+.sc-card hr{border:none;border-top:1px solid var(--border-subtle);margin:16px 0;}
+.sc-card ul{list-style:none;flex:1;display:flex;flex-direction:column;gap:9px;}
+.sc-card ul li{
+  display:flex;align-items:flex-start;gap:9px;
+  font-size:.85rem;color:var(--text-secondary);line-height:1.45;
 }
-.pkg .price span{font-size:1rem;opacity:.6;}
-.pkg ul{list-style:none;margin-top:20px;}
-.pkg ul li{
-  padding:10px 0;border-bottom:1px dashed rgba(255,255,255,.1);
-  display:flex;align-items:center;gap:10px;font-size:.95rem;
+.sc-card ul li::before{
+  content:"";flex-shrink:0;margin-top:4px;
+  width:14px;height:14px;border-radius:50%;
+  background:var(--accent-subtle) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%2334d399" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>') center/9px no-repeat;
 }
-.pkg ul li::before{
-  content:"✓";color:var(--cyan);font-weight:bold;
-  background:rgba(0,234,255,.15);
-  width:22px;height:22px;display:flex;align-items:center;justify-content:center;
-  border-radius:50%;font-size:.8rem;
+.sc-card .pkg-btn{margin-top:20px;width:100%;}
+.sc-card .pkg-btn.ghost{
+  background:transparent;border:1px solid var(--border);color:var(--text-primary);
 }
-.pkg .pkg-btn{
-  margin-top:24px;width:100%;padding:14px;
-  border:none;border-radius:12px;cursor:pointer;
-  background:linear-gradient(90deg,var(--cyan),var(--blue));
-  color:#fff;font-weight:700;letter-spacing:1px;
-  transition:.3s;
-}
-.pkg .pkg-btn:hover{box-shadow:0 0 25px var(--cyan);}
-.pkg.featured{
-  border-color:var(--gold);
-  background:linear-gradient(160deg,rgba(255,209,102,.12),rgba(255,61,129,.06));
-}
-.pkg.featured .price{color:var(--gold);text-shadow:0 0 20px rgba(255,209,102,.6);}
-.pkg.featured .pkg-btn{background:linear-gradient(90deg,var(--gold),var(--pink));}
-.pkg .badge{
-  position:absolute;top:18px;right:-36px;
-  background:var(--gold);color:#001233;
-  padding:5px 44px;font-size:.75rem;font-weight:800;letter-spacing:1px;
-  transform:rotate(45deg);
-}
+.sc-card .pkg-btn.ghost:hover{background:var(--bg-elevated);border-color:#3f3f46;}
 
-/* ---------- ABOUT / CONTACT / LOCATION ---------- */
-#info{
-  background:linear-gradient(180deg,#001233,#00091f);
-}
+/* ---------- INFO ---------- */
 .info-grid{
-  display:grid;gap:30px;max-width:1200px;margin:0 auto;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  display:grid;gap:16px;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 }
 .info-card{
-  padding:40px 30px;border-radius:20px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(0,234,255,.2);
-  text-align:center;transition:.4s;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:24px;
+  transition:border-color .2s;
 }
-.info-card:hover{transform:translateY(-8px);border-color:var(--cyan);box-shadow:0 15px 40px rgba(0,234,255,.25);}
-.info-card .icon{
-  font-size:3rem;margin-bottom:16px;
-  display:inline-block;
-  animation:float 4s ease-in-out infinite;
+.info-card:hover{border-color:#3f3f46;}
+.info-icon{
+  width:36px;height:36px;border-radius:var(--radius-md);
+  background:var(--accent-subtle);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:16px;color:var(--accent-hover);
 }
-@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
-.info-card h3{font-family:'Bebas Neue',sans-serif;letter-spacing:2px;font-size:1.6rem;color:var(--cyan);margin-bottom:12px;}
-.info-card p,.info-card a{color:var(--white);opacity:.85;line-height:1.7;text-decoration:none;font-size:.95rem;}
-.info-card a:hover{color:var(--cyan);}
+.info-icon svg{width:18px;height:18px;}
+.info-card h3{
+  font-family:var(--font-display);font-size:.95rem;font-weight:600;
+  margin-bottom:8px;letter-spacing:-.01em;
+}
+.info-card p,.info-card a{
+  font-size:.875rem;color:var(--text-secondary);text-decoration:none;
+}
+.info-card a:hover{color:var(--accent-hover);}
+.info-card .muted{color:var(--text-muted);font-size:.8rem;margin-top:10px;}
+.hours-table{width:100%;border-collapse:collapse;font-size:.875rem;}
+.hours-table td{padding:5px 0;color:var(--text-secondary);border-bottom:1px solid var(--border-subtle);}
+.hours-table tr:last-child td{border-bottom:none;}
+.hours-table td:last-child{text-align:right;font-family:var(--font-mono);font-size:.8rem;color:var(--text-primary);}
 
 /* ---------- BOOKING ---------- */
-#book{background:linear-gradient(180deg,#00091f,#001233);}
+#book{background:var(--bg-surface);border-top:1px solid var(--border-subtle);}
+.booking-wrap{max-width:560px;margin:0 auto;}
 .booking-form{
-  max-width:650px;margin:0 auto;
-  padding:50px;border-radius:24px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(0,234,255,.25);
-  backdrop-filter:blur(10px);
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:28px;
+  box-shadow:var(--shadow-card);
 }
-.booking-form .row{display:grid;gap:18px;grid-template-columns:1fr 1fr;margin-bottom:18px;}
-.booking-form input,.booking-form select{
-  width:100%;padding:14px 16px;border-radius:10px;
-  background:rgba(0,0,0,.3);border:1px solid rgba(0,234,255,.3);
-  color:var(--white);font-size:1rem;
+.field{margin-bottom:16px;}
+.field label{
+  display:block;font-size:.78rem;font-weight:500;
+  color:var(--text-secondary);margin-bottom:6px;
 }
-.booking-form input:focus,.booking-form select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 15px rgba(0,234,255,.4);}
-.booking-form .full{grid-column:1/-1;}
-.booking-form button{
-  width:100%;margin-top:10px;padding:16px;border:none;border-radius:12px;cursor:pointer;
-  background:linear-gradient(90deg,var(--cyan),var(--blue));
-  color:#fff;font-weight:700;font-size:1.1rem;letter-spacing:2px;
-  box-shadow:0 0 25px rgba(0,234,255,.4);transition:.3s;
+.field input,.field select{
+  width:100%;padding:10px 12px;
+  background:var(--bg-surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  color:var(--text-primary);
+  font-family:var(--font-body);font-size:.9rem;
+  transition:border-color .15s,box-shadow .15s;
+  color-scheme:dark;
 }
-.booking-form button:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,234,255,.6);}
+.field input::placeholder{color:var(--text-muted);}
+.field input:focus,.field select:focus{
+  outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-subtle);
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.booking-form button[type=submit]{width:100%;margin-top:6px;}
+.form-note{
+  text-align:center;font-size:.78rem;color:var(--text-muted);margin-top:14px;
+}
 
+/* Toast */
+.toast{
+  position:fixed;bottom:24px;right:24px;z-index:60;
+  display:flex;align-items:center;gap:10px;
+  background:var(--bg-card);
+  border:1px solid rgba(16,185,129,.35);
+  border-radius:var(--radius-md);
+  padding:12px 16px;
+  font-size:.85rem;color:var(--text-primary);
+  box-shadow:var(--shadow-card);
+  opacity:0;transform:translateY(8px);
+  transition:opacity .25s,transform .25s;
+  pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateY(0);}
+.toast .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);}
+
+/* ---------- FOOTER ---------- */
 footer{
-  text-align:center;padding:40px 20px;
-  background:#00060f;border-top:1px solid rgba(0,234,255,.15);
-  font-size:.9rem;opacity:.7;
+  border-top:1px solid var(--border-subtle);
+  padding:32px 24px;
 }
+.footer-inner{
+  max-width:1120px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+footer p{font-size:.8rem;color:var(--text-muted);}
+footer .foot-links{display:flex;gap:16px;}
+footer .foot-links a{font-size:.8rem;color:var(--text-muted);text-decoration:none;transition:color .15s;}
+footer .foot-links a:hover{color:var(--text-primary);}
 
-@media(max-width:720px){
+@media(max-width:760px){
   nav ul{display:none;}
-  .booking-form{padding:30px 20px;}
-  .booking-form .row{grid-template-columns:1fr;}
-  section{padding:90px 6%;}
+  .stat-row{grid-template-columns:repeat(2,1fr);}
+  .form-row{grid-template-columns:1fr;}
+  section{padding:64px 20px;}
+  .hero{padding:130px 20px 64px;}
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="logo">SplashKing</div>
-  <ul>
-    <li><a href="#packages">Packages</a></li>
-    <li><a href="#info">Location</a></li>
-    <li><a href="#info">Contact</a></li>
-    <li><a href="#book">Book</a></li>
-  </ul>
-  <button class="book-btn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">BOOK NOW</button>
+  <div class="nav-inner">
+    <a class="logo" href="#"><span class="logo-mark">✦</span>SplashKing</a>
+    <ul>
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#info">Location</a></li>
+      <li><a href="#info">Hours</a></li>
+      <li><a href="#book">Book</a></li>
+    </ul>
+    <button class="sc-btn-primary" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book a Wash</button>
+  </div>
 </nav>
 
 <!-- HERO -->
 <header class="hero">
-  <div class="bubbles" id="bubbles"></div>
-  <div style="position:relative;z-index:2;padding:0 20px;">
-    <h1>SHINE LIKE<br>ROYALTY</h1>
-    <p class="tagline">★ PREMIUM CAR WASH &nbsp;•&nbsp; LIGHTNING FAST &nbsp;•&nbsp; ECO FRIENDLY ★</p>
-    <div class="cta-row">
-      <button class="book-btn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">BOOK YOUR WASH</button>
-      <button class="ghost-btn" onclick="document.getElementById('packages').scrollIntoView({behavior:'smooth'})">VIEW PACKAGES</button>
+  <div class="hero-inner">
+    <div class="hero-badge animate-in stagger-1"><span class="dot"></span>Open today &middot; 7am &ndash; 9pm</div>
+    <h1 class="animate-in stagger-2">A cleaner car,<br><span class="accent">without the wait.</span></h1>
+    <p class="sub animate-in stagger-3">Premium exterior and interior car care in Shinetown. Eco-friendly products, spot-free finishes, and most washes done in under 10 minutes.</p>
+    <div class="cta-row animate-in stagger-4">
+      <button class="sc-btn-primary btn-lg" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book your wash</button>
+      <a class="sc-btn-secondary btn-lg" href="#packages">View packages</a>
     </div>
-  </div>
-  <div class="car-scene">
-    <div class="car">🚗</div>
-    <div class="road"></div>
+    <div class="stat-row">
+      <div class="stat-tile animate-in stagger-3"><div class="value">10<em>min</em></div><div class="label">Express wash</div></div>
+      <div class="stat-tile animate-in stagger-4"><div class="value">4.9<em>★</em></div><div class="label">Customer rating</div></div>
+      <div class="stat-tile animate-in stagger-5"><div class="value">50k<em>+</em></div><div class="label">Cars washed</div></div>
+      <div class="stat-tile animate-in stagger-6"><div class="value">100<em>%</em></div><div class="label">Satisfaction</div></div>
+    </div>
   </div>
 </header>
 
 <!-- PACKAGES -->
 <section id="packages">
-  <h2 class="section-title">Choose Your Shine</h2>
-  <p class="section-sub">Transparent pricing • No hidden fees • 100% satisfaction guaranteed</p>
-  <div class="packages">
-
-    <div class="pkg">
-      <h3>EXPRESS</h3>
-      <div class="price">$12<span>/wash</span></div>
-      <ul>
-        <li>Exterior foam wash</li>
-        <li>High-pressure rinse</li>
-        <li>Spot-free finish</li>
-        <li>Power air dry</li>
-        <li>10 minute service</li>
-      </ul>
-      <button class="pkg-btn" onclick="selectPkg('Express')">Select Express</button>
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="eyebrow">Pricing</div>
+      <h2 class="section-title">Choose your shine</h2>
+      <p class="section-sub">Transparent pricing with no hidden fees. Every wash is backed by our 100% satisfaction guarantee.</p>
     </div>
+    <div class="packages">
 
-    <div class="pkg">
-      <h3>DELUXE</h3>
-      <div class="price">$22<span>/wash</span></div>
-      <ul>
-        <li>Everything in Express</li>
-        <li>Triple-foam conditioner</li>
-        <li>Tire shine &amp; wheel clean</li>
-        <li>Undercarriage rinse</li>
-        <li>Clear-coat protectant</li>
-        <li>Rain repellent</li>
-      </ul>
-      <button class="pkg-btn" onclick="selectPkg('Deluxe')">Select Deluxe</button>
+      <div class="sc-card reveal">
+        <div class="pkg-name">Express</div>
+        <div class="pkg-desc">In and out in 10 minutes</div>
+        <div class="pkg-price">$12<span> / wash</span></div>
+        <hr>
+        <ul>
+          <li>Exterior foam wash</li>
+          <li>High-pressure rinse</li>
+          <li>Spot-free finish</li>
+          <li>Power air dry</li>
+        </ul>
+        <button class="sc-btn-primary pkg-btn ghost" onclick="selectPkg('Express')">Select Express</button>
+      </div>
+
+      <div class="sc-card reveal">
+        <div class="pkg-name">Deluxe</div>
+        <div class="pkg-desc">Protection that lasts</div>
+        <div class="pkg-price">$22<span> / wash</span></div>
+        <hr>
+        <ul>
+          <li>Everything in Express</li>
+          <li>Triple-foam conditioner</li>
+          <li>Tire shine &amp; wheel clean</li>
+          <li>Undercarriage rinse</li>
+          <li>Clear-coat protectant</li>
+          <li>Rain repellent</li>
+        </ul>
+        <button class="sc-btn-primary pkg-btn ghost" onclick="selectPkg('Deluxe')">Select Deluxe</button>
+      </div>
+
+      <div class="sc-card featured reveal">
+        <div class="plan-badge">Best value</div>
+        <div class="pkg-name">Royal</div>
+        <div class="pkg-desc">Inside and out, done right</div>
+        <div class="pkg-price">$35<span> / wash</span></div>
+        <hr>
+        <ul>
+          <li>Everything in Deluxe</li>
+          <li>Hand-applied carnauba wax</li>
+          <li>Interior vacuum &amp; wipe</li>
+          <li>Dashboard conditioner</li>
+          <li>Window cleaning in &amp; out</li>
+          <li>Ceramic spray coating</li>
+        </ul>
+        <button class="sc-btn-primary pkg-btn" onclick="selectPkg('Royal')">Go Royal</button>
+      </div>
+
+      <div class="sc-card reveal">
+        <div class="pkg-name">Ultimate</div>
+        <div class="pkg-desc">Full detail, showroom finish</div>
+        <div class="pkg-price">$59<span> / wash</span></div>
+        <hr>
+        <ul>
+          <li>Everything in Royal</li>
+          <li>Full interior detail</li>
+          <li>Leather conditioning</li>
+          <li>Engine bay cleaning</li>
+          <li>Headlight restoration</li>
+          <li>6-month paint sealant</li>
+        </ul>
+        <button class="sc-btn-primary pkg-btn ghost" onclick="selectPkg('Ultimate')">Go Ultimate</button>
+      </div>
+
     </div>
-
-    <div class="pkg featured">
-      <div class="badge">BEST VALUE</div>
-      <h3>ROYAL</h3>
-      <div class="price">$35<span>/wash</span></div>
-      <ul>
-        <li>Everything in Deluxe</li>
-        <li>Hand-applied carnauba wax</li>
-        <li>Interior vacuum &amp; wipe</li>
-        <li>Dashboard conditioner</li>
-        <li>Window cleaning in &amp; out</li>
-        <li>Air freshener of choice</li>
-        <li>Ceramic spray coating</li>
-      </ul>
-      <button class="pkg-btn" onclick="selectPkg('Royal')">Go Royal</button>
-    </div>
-
-    <div class="pkg">
-      <h3>ULTIMATE</h3>
-      <div class="price">$59<span>/wash</span></div>
-      <ul>
-        <li>Everything in Royal</li>
-        <li>Full interior detail</li>
-        <li>Leather conditioning</li>
-        <li>Engine bay cleaning</li>
-        <li>Headlight restoration</li>
-        <li>Clay bar treatment</li>
-        <li>6-month paint sealant</li>
-      </ul>
-      <button class="pkg-btn" onclick="selectPkg('Ultimate')">Go Ultimate</button>
-    </div>
-
   </div>
 </section>
 
 <!-- INFO -->
 <section id="info">
-  <h2 class="section-title">Find &amp; Reach Us</h2>
-  <p class="section-sub">We're open 7 days a week, rain or shine</p>
-  <div class="info-grid">
-    <div class="info-card">
-      <div class="icon">📍</div>
-      <h3>Location</h3>
-      <p>1420 Sparkle Avenue<br>Shinetown, CA 90210<br><br>Right off Exit 42, next to the Shell station</p>
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="eyebrow">Visit us</div>
+      <h2 class="section-title">Find &amp; reach us</h2>
+      <p class="section-sub">Open seven days a week, rain or shine.</p>
     </div>
-    <div class="info-card">
-      <div class="icon">📞</div>
-      <h3>Contact</h3>
-      <p>
-        <a href="tel:+15551234567">(555) 123-4567</a><br>
-        <a href="mailto:hello@splashking.com">hello@splashking.com</a><br><br>
-        We respond in under 1 hour!
-      </p>
-    </div>
-    <div class="info-card">
-      <div class="icon">⏰</div>
-      <h3>Hours</h3>
-      <p>Mon – Fri: 7am – 9pm<br>Saturday: 8am – 8pm<br>Sunday: 9am – 6pm<br><br>Holiday hours may vary</p>
+    <div class="info-grid">
+      <div class="info-card reveal">
+        <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h3>Location</h3>
+        <p>1420 Sparkle Avenue<br>Shinetown, CA 90210</p>
+        <p class="muted">Right off Exit 42, next to the Shell station</p>
+      </div>
+      <div class="info-card reveal">
+        <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <h3>Contact</h3>
+        <p><a href="tel:+15551234567">(555) 123-4567</a><br><a href="mailto:hello@splashking.com">hello@splashking.com</a></p>
+        <p class="muted">We respond in under 1 hour</p>
+      </div>
+      <div class="info-card reveal">
+        <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h3>Hours</h3>
+        <table class="hours-table">
+          <tr><td>Mon &ndash; Fri</td><td>7:00 &ndash; 21:00</td></tr>
+          <tr><td>Saturday</td><td>8:00 &ndash; 20:00</td></tr>
+          <tr><td>Sunday</td><td>9:00 &ndash; 18:00</td></tr>
+        </table>
+        <p class="muted">Holiday hours may vary</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- BOOK -->
 <section id="book">
-  <h2 class="section-title">Book Your Wash</h2>
-  <p class="section-sub">Takes less than 60 seconds</p>
-  <form class="booking-form" onsubmit="event.preventDefault();alert('Thanks! We\\'ll confirm your booking shortly.');">
-    <div class="row">
-      <input type="text" placeholder="Full Name" required>
-      <input type="tel" placeholder="Phone Number" required>
+  <div class="section-inner">
+    <div class="section-head reveal" style="text-align:center;">
+      <div class="eyebrow">Booking</div>
+      <h2 class="section-title">Book your wash</h2>
+      <p class="section-sub" style="margin-left:auto;margin-right:auto;">Takes less than 60 seconds. We'll confirm by text or email.</p>
     </div>
-    <div class="row">
-      <input type="email" class="full" placeholder="Email Address" required>
+    <div class="booking-wrap reveal">
+      <form class="booking-form" id="bookingForm">
+        <div class="form-row">
+          <div class="field">
+            <label for="fName">Full name</label>
+            <input id="fName" type="text" placeholder="Jane Driver" required>
+          </div>
+          <div class="field">
+            <label for="fPhone">Phone number</label>
+            <input id="fPhone" type="tel" placeholder="(555) 000-0000" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="fEmail">Email address</label>
+          <input id="fEmail" type="email" placeholder="jane@example.com" required>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="pkgSelect">Package</label>
+            <select id="pkgSelect" required>
+              <option value="">Choose package</option>
+              <option>Express — $12</option>
+              <option>Deluxe — $22</option>
+              <option>Royal — $35</option>
+              <option>Ultimate — $59</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fWhen">Date &amp; time</label>
+            <input id="fWhen" type="datetime-local" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="fVehicle">Vehicle make &amp; model <span style="color:var(--text-muted);font-weight:400;">(optional)</span></label>
+          <input id="fVehicle" type="text" placeholder="e.g. Honda Civic">
+        </div>
+        <button type="submit" class="sc-btn-primary btn-lg">Confirm booking</button>
+        <p class="form-note">No payment required now — pay when you arrive.</p>
+      </form>
     </div>
-    <div class="row">
-      <select id="pkgSelect" required>
-        <option value="">Choose Package</option>
-        <option>Express — $12</option>
-        <option>Deluxe — $22</option>
-        <option>Royal — $35</option>
-        <option>Ultimate — $59</option>
-      </select>
-      <input type="datetime-local" required>
-    </div>
-    <div class="row">
-      <input type="text" class="full" placeholder="Vehicle make &amp; model">
-    </div>
-    <button type="submit">CONFIRM BOOKING</button>
-  </form>
+  </div>
 </section>
 
 <footer>
-  © 2026 SplashKing Car Wash • Crafted with 💧 in Shinetown, CA
+  <div class="footer-inner">
+    <p>&copy; 2026 SplashKing Car Wash &middot; Shinetown, CA</p>
+    <div class="foot-links">
+      <a href="#packages">Packages</a>
+      <a href="#info">Location</a>
+      <a href="#book">Book</a>
+    </div>
+  </div>
 </footer>
 
-<script>
-/* Bubbles */
-const bw=document.getElementById('bubbles');
-for(let i=0;i<25;i++){
-  const b=document.createElement('div');
-  b.className='bubble';
-  const size=8+Math.random()*40;
-  b.style.width=b.style.height=size+'px';
-  b.style.left=Math.random()*100+'%';
-  b.style.animationDuration=(6+Math.random()*10)+'s';
-  b.style.animationDelay=(Math.random()*8)+'s';
-  bw.appendChild(b);
-}
+<div class="toast" id="toast"><span class="dot"></span><span id="toastMsg">Booking confirmed</span></div>
 
+<script>
 /* Reveal on scroll */
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show');}),{threshold:.15});
-document.querySelectorAll('.pkg').forEach(el=>io.observe(el));
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);}
+}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 /* Package select */
 function selectPkg(name){
@@ -473,6 +570,16 @@ function selectPkg(name){
   for(const o of sel.options){if(o.text.startsWith(name)){sel.value=o.value;break;}}
   document.getElementById('book').scrollIntoView({behavior:'smooth'});
 }
+
+/* Booking form */
+document.getElementById('bookingForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const t=document.getElementById('toast');
+  document.getElementById('toastMsg').textContent="Thanks! We'll confirm your booking shortly.";
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),4000);
+  e.target.reset();
+});
 </script>
 </body>
 </html>
