@@ -1,0 +1,7 @@
+/* ============================================================
+   ShopConnect Pro — messaging-overhaul overrides
+   Loaded after styles.css; keep overrides small and additive.
+   ============================================================ */
+[data-headline]{max-width:20ch;margin-left:auto;margin-right:auto;}
+.hero .lead strong{color:var(--ink);}
+.quote p:first-child{font-size:1.02rem;}
