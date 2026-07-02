@@ -3,476 +3,487 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SplashKing Car Wash — Shine Like Royalty</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<title>ShopConnect — Payments that sync back to your software</title>
+<meta name="description" content="Run card-present and card-not-present payments through the processor of your choice — every transaction writes back into the software your merchants already use.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/sc.css">
 <style>
-:root{
-  --cyan:#00eaff;
-  --blue:#0066ff;
-  --deep:#001233;
-  --gold:#ffd166;
-  --pink:#ff3d81;
-  --white:#f5fbff;
+/* ---------- Landing layout ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:rgba(5,5,6,.8);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border-subtle);
 }
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-html{scroll-behavior:smooth;}
-body{
-  background:var(--deep);
-  color:var(--white);
-  overflow-x:hidden;
+.nav-inner{
+  max-width:1120px;margin:0 auto;padding:12px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
 }
+.nav-links{display:flex;gap:4px;list-style:none;}
+.nav-links a{
+  color:var(--text-secondary);text-decoration:none;
+  font-size:.85rem;font-weight:500;
+  padding:7px 12px;border-radius:8px;
+  transition:color .15s,background .15s;
+}
+.nav-links a:hover{color:var(--text-primary);background:var(--bg-card);}
+.nav-cta{display:flex;gap:10px;align-items:center;}
 
-/* ---------- NAV ---------- */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;justify-content:space-between;align-items:center;
-  padding:18px 6%;
-  backdrop-filter:blur(14px);
-  background:rgba(0,18,51,0.6);
-  border-bottom:1px solid rgba(0,234,255,0.2);
-}
-.logo{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:2rem;letter-spacing:2px;
-  background:linear-gradient(90deg,var(--cyan),var(--gold));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  display:flex;align-items:center;gap:8px;
-}
-.logo::before{
-  content:"";width:34px;height:34px;border-radius:50%;
-  background:radial-gradient(circle at 30% 30%,#fff,var(--cyan) 60%,var(--blue));
-  box-shadow:0 0 20px var(--cyan);
-  animation:bubble 3s ease-in-out infinite;
-}
-nav ul{display:flex;gap:32px;list-style:none;}
-nav ul a{
-  color:var(--white);text-decoration:none;font-weight:500;font-size:.95rem;
-  position:relative;transition:.3s;
-}
-nav ul a::after{
-  content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;
-  background:var(--cyan);transition:.3s;
-}
-nav ul a:hover{color:var(--cyan);}
-nav ul a:hover::after{width:100%;}
-.book-btn{
-  padding:10px 22px;border:none;border-radius:30px;cursor:pointer;
-  background:linear-gradient(90deg,var(--cyan),var(--blue));
-  color:#fff;font-weight:700;letter-spacing:1px;
-  box-shadow:0 0 20px rgba(0,234,255,.5);
-  transition:transform .3s;
-}
-.book-btn:hover{transform:scale(1.08);}
-
-/* ---------- HERO ---------- */
 .hero{
-  position:relative;min-height:100vh;
-  display:flex;align-items:center;justify-content:center;
-  text-align:center;overflow:hidden;
-  background:
-    radial-gradient(ellipse at 20% 30%,rgba(0,234,255,.25),transparent 60%),
-    radial-gradient(ellipse at 80% 70%,rgba(255,61,129,.2),transparent 60%),
-    linear-gradient(180deg,#001233 0%,#002b5c 100%);
-}
-.hero h1{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(3rem,9vw,8rem);
-  letter-spacing:4px;line-height:.9;
-  background:linear-gradient(90deg,#fff,var(--cyan),var(--gold),#fff);
-  background-size:300% 100%;
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:shine 5s linear infinite;
-  text-shadow:0 0 40px rgba(0,234,255,.3);
-}
-.hero p.tagline{
-  font-size:clamp(1rem,1.6vw,1.3rem);
-  margin:20px 0 36px;opacity:.9;letter-spacing:2px;
-}
-.hero .cta-row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
-.ghost-btn{
-  padding:14px 32px;border-radius:30px;cursor:pointer;
-  background:transparent;color:var(--white);
-  border:2px solid var(--cyan);font-weight:600;letter-spacing:1px;
-  transition:.3s;
-}
-.ghost-btn:hover{background:var(--cyan);color:var(--deep);box-shadow:0 0 25px var(--cyan);}
-
-/* Car driving across */
-.car-scene{
-  position:absolute;bottom:10%;left:0;width:100%;height:180px;
-  pointer-events:none;
-}
-.road{
-  position:absolute;bottom:0;left:0;right:0;height:4px;
-  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
-  box-shadow:0 0 20px var(--cyan);
-}
-.car{
-  position:absolute;bottom:10px;left:-300px;
-  font-size:5rem;
-  animation:drive 9s linear infinite;
-  filter:drop-shadow(0 0 18px var(--cyan));
-}
-@keyframes drive{
-  0%{left:-300px;transform:translateY(0);}
-  45%{transform:translateY(-4px);}
-  50%{transform:translateY(0);}
-  100%{left:110%;}
-}
-
-/* Bubbles */
-.bubbles{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
-.bubble{
-  position:absolute;bottom:-100px;border-radius:50%;
-  background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.9),rgba(0,234,255,.3) 60%,transparent);
-  box-shadow:inset 0 0 10px rgba(255,255,255,.6),0 0 15px rgba(0,234,255,.4);
-  animation:rise linear infinite;
-}
-@keyframes rise{
-  0%{transform:translateY(0) translateX(0);opacity:0;}
-  10%{opacity:1;}
-  90%{opacity:.8;}
-  100%{transform:translateY(-110vh) translateX(40px);opacity:0;}
-}
-@keyframes bubble{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-4px);}
-}
-@keyframes shine{
-  0%{background-position:0% 0;}
-  100%{background-position:300% 0;}
-}
-
-/* ---------- SECTIONS ---------- */
-section{padding:120px 6%;position:relative;}
-.section-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(2.5rem,5vw,4.5rem);
-  text-align:center;letter-spacing:3px;
-  margin-bottom:12px;
-  background:linear-gradient(90deg,var(--cyan),var(--gold));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.section-sub{text-align:center;opacity:.8;margin-bottom:60px;letter-spacing:1px;}
-
-/* ---------- PACKAGES ---------- */
-#packages{background:linear-gradient(180deg,#002b5c,#001233);}
-.packages{
-  display:grid;gap:30px;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  max-width:1300px;margin:0 auto;
-}
-.pkg{
   position:relative;
-  padding:40px 30px;border-radius:24px;
-  background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(0,234,255,.03));
-  border:1px solid rgba(0,234,255,.25);
-  backdrop-filter:blur(10px);
-  transition:transform .5s,box-shadow .5s;
-  overflow:hidden;
-  opacity:0;transform:translateY(40px);
+  padding:150px 24px 72px;
+  background:
+    radial-gradient(ellipse 55% 45% at 50% -5%,rgba(16,185,129,.13),transparent 70%),
+    var(--bg-deep);
 }
-.pkg.show{opacity:1;transform:translateY(0);}
-.pkg:hover{
-  transform:translateY(-14px) scale(1.02);
-  box-shadow:0 20px 60px rgba(0,234,255,.35);
-  border-color:var(--cyan);
+.hero-inner{max-width:1120px;margin:0 auto;text-align:center;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 12px;border-radius:999px;
+  background:var(--accent-subtle);border:1px solid rgba(16,185,129,.2);
+  color:var(--accent-hover);font-size:.75rem;font-weight:500;
+  margin-bottom:24px;
 }
-.pkg::before{
-  content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;
-  background:conic-gradient(from 0deg,transparent,rgba(0,234,255,.15),transparent 30%);
-  animation:spin 6s linear infinite;opacity:0;transition:.4s;
+.hero-badge .status-dot{animation:pulse 2s ease-in-out infinite;}
+.hero h1{
+  font-family:var(--font-display);
+  font-size:clamp(2.3rem,5.2vw,3.9rem);
+  font-weight:700;letter-spacing:-.03em;line-height:1.07;
+  margin-bottom:20px;
 }
-.pkg:hover::before{opacity:1;}
-@keyframes spin{to{transform:rotate(360deg);}}
-.pkg > *{position:relative;z-index:1;}
-.pkg h3{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:2rem;letter-spacing:2px;margin-bottom:6px;
+.hero h1 .accent{
+  background:linear-gradient(90deg,var(--accent),#34d399);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
 }
-.pkg .price{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:3.5rem;color:var(--cyan);
-  text-shadow:0 0 20px rgba(0,234,255,.6);
-}
-.pkg .price span{font-size:1rem;opacity:.6;}
-.pkg ul{list-style:none;margin-top:20px;}
-.pkg ul li{
-  padding:10px 0;border-bottom:1px dashed rgba(255,255,255,.1);
-  display:flex;align-items:center;gap:10px;font-size:.95rem;
-}
-.pkg ul li::before{
-  content:"✓";color:var(--cyan);font-weight:bold;
-  background:rgba(0,234,255,.15);
-  width:22px;height:22px;display:flex;align-items:center;justify-content:center;
-  border-radius:50%;font-size:.8rem;
-}
-.pkg .pkg-btn{
-  margin-top:24px;width:100%;padding:14px;
-  border:none;border-radius:12px;cursor:pointer;
-  background:linear-gradient(90deg,var(--cyan),var(--blue));
-  color:#fff;font-weight:700;letter-spacing:1px;
-  transition:.3s;
-}
-.pkg .pkg-btn:hover{box-shadow:0 0 25px var(--cyan);}
-.pkg.featured{
-  border-color:var(--gold);
-  background:linear-gradient(160deg,rgba(255,209,102,.12),rgba(255,61,129,.06));
-}
-.pkg.featured .price{color:var(--gold);text-shadow:0 0 20px rgba(255,209,102,.6);}
-.pkg.featured .pkg-btn{background:linear-gradient(90deg,var(--gold),var(--pink));}
-.pkg .badge{
-  position:absolute;top:18px;right:-36px;
-  background:var(--gold);color:#001233;
-  padding:5px 44px;font-size:.75rem;font-weight:800;letter-spacing:1px;
-  transform:rotate(45deg);
-}
+.hero .sub{max-width:620px;margin:0 auto 32px;color:var(--text-secondary);font-size:1.05rem;}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.hero-note{margin-top:14px;font-size:.78rem;color:var(--text-muted);}
 
-/* ---------- ABOUT / CONTACT / LOCATION ---------- */
-#info{
-  background:linear-gradient(180deg,#001233,#00091f);
+/* Console preview */
+.preview-wrap{max-width:980px;margin:64px auto 0;position:relative;}
+.preview-glow{
+  position:absolute;inset:-1px;border-radius:16px;
+  background:linear-gradient(180deg,rgba(16,185,129,.25),transparent 40%);
+  filter:blur(18px);opacity:.5;pointer-events:none;
 }
-.info-grid{
-  display:grid;gap:30px;max-width:1200px;margin:0 auto;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+.preview{
+  position:relative;
+  background:var(--bg-surface);
+  border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 24px 80px rgba(0,0,0,.6);
+  display:grid;grid-template-columns:200px 1fr;
+  text-align:left;font-size:.78rem;
 }
-.info-card{
-  padding:40px 30px;border-radius:20px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(0,234,255,.2);
-  text-align:center;transition:.4s;
+.pv-side{background:var(--bg-deep);border-right:1px solid var(--border-subtle);padding:14px 10px;}
+.pv-side .logo-lockup{padding:0 6px 12px;font-size:.8rem;}
+.pv-side .logo-mark{width:24px;height:24px;border-radius:6px;}
+.pv-item{
+  display:flex;align-items:center;gap:9px;
+  padding:6px 10px;border-radius:7px;
+  color:var(--text-muted);margin-bottom:1px;
 }
-.info-card:hover{transform:translateY(-8px);border-color:var(--cyan);box-shadow:0 15px 40px rgba(0,234,255,.25);}
-.info-card .icon{
-  font-size:3rem;margin-bottom:16px;
-  display:inline-block;
-  animation:float 4s ease-in-out infinite;
-}
-@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
-.info-card h3{font-family:'Bebas Neue',sans-serif;letter-spacing:2px;font-size:1.6rem;color:var(--cyan);margin-bottom:12px;}
-.info-card p,.info-card a{color:var(--white);opacity:.85;line-height:1.7;text-decoration:none;font-size:.95rem;}
-.info-card a:hover{color:var(--cyan);}
+.pv-item.active{background:var(--bg-card);color:var(--text-primary);}
+.pv-item svg{width:13px;height:13px;flex-shrink:0;}
+.pv-main{padding:18px 20px;min-width:0;}
+.pv-title{font-family:var(--font-display);font-weight:600;font-size:1rem;margin-bottom:14px;}
+.pv-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
+.pv-stat{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:12px;}
+.pv-stat .l{font-size:.62rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);font-weight:600;}
+.pv-stat .v{font-family:var(--font-mono);font-size:1.05rem;font-weight:600;margin-top:3px;}
+.pv-stat .v em{font-style:normal;color:var(--accent-hover);}
+.pv-table{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.pv-table .hd{padding:10px 14px;border-bottom:1px solid var(--border);font-family:var(--font-display);font-weight:600;font-size:.8rem;display:flex;align-items:center;gap:8px;}
+.pv-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 14px;border-bottom:1px solid var(--border-subtle);color:var(--text-secondary);}
+.pv-row:last-child{border-bottom:none;}
+.pv-row .mono{color:var(--text-primary);}
 
-/* ---------- BOOKING ---------- */
-#book{background:linear-gradient(180deg,#00091f,#001233);}
-.booking-form{
-  max-width:650px;margin:0 auto;
-  padding:50px;border-radius:24px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(0,234,255,.25);
-  backdrop-filter:blur(10px);
+/* Sections */
+section{padding:88px 24px;}
+.section-inner{max-width:1120px;margin:0 auto;}
+.section-head{margin-bottom:40px;}
+.eyebrow{
+  font-family:var(--font-mono);font-size:.75rem;font-weight:500;
+  color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;
 }
-.booking-form .row{display:grid;gap:18px;grid-template-columns:1fr 1fr;margin-bottom:18px;}
-.booking-form input,.booking-form select{
-  width:100%;padding:14px 16px;border-radius:10px;
-  background:rgba(0,0,0,.3);border:1px solid rgba(0,234,255,.3);
-  color:var(--white);font-size:1rem;
+.section-title{
+  font-family:var(--font-display);
+  font-size:clamp(1.6rem,3vw,2.2rem);
+  font-weight:700;letter-spacing:-.02em;line-height:1.15;
 }
-.booking-form input:focus,.booking-form select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 15px rgba(0,234,255,.4);}
-.booking-form .full{grid-column:1/-1;}
-.booking-form button{
-  width:100%;margin-top:10px;padding:16px;border:none;border-radius:12px;cursor:pointer;
-  background:linear-gradient(90deg,var(--cyan),var(--blue));
-  color:#fff;font-weight:700;font-size:1.1rem;letter-spacing:2px;
-  box-shadow:0 0 25px rgba(0,234,255,.4);transition:.3s;
-}
-.booking-form button:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,234,255,.6);}
+.section-sub{color:var(--text-secondary);margin-top:10px;max-width:560px;}
 
-footer{
-  text-align:center;padding:40px 20px;
-  background:#00060f;border-top:1px solid rgba(0,234,255,.15);
-  font-size:.9rem;opacity:.7;
+/* Processor strip */
+.strip{border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle);background:var(--bg-surface);padding:28px 24px;}
+.strip-inner{max-width:1120px;margin:0 auto;text-align:center;}
+.strip-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);font-weight:600;margin-bottom:16px;}
+.strip-logos{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;}
+.strip-logos span{
+  font-family:var(--font-display);font-weight:600;font-size:.9rem;
+  color:var(--text-muted);letter-spacing:-.01em;
+  transition:color .2s;
 }
+.strip-logos span:hover{color:var(--text-secondary);}
 
-@media(max-width:720px){
-  nav ul{display:none;}
-  .booking-form{padding:30px 20px;}
-  .booking-form .row{grid-template-columns:1fr;}
-  section{padding:90px 6%;}
+/* How it works */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:step;}
+.step{padding:24px;position:relative;}
+.step .num{
+  font-family:var(--font-mono);font-size:.72rem;color:var(--accent-hover);
+  background:var(--accent-subtle);border:1px solid rgba(16,185,129,.2);
+  width:26px;height:26px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+}
+.step h3{font-family:var(--font-display);font-size:.95rem;font-weight:600;margin-bottom:6px;letter-spacing:-.01em;}
+.step p{font-size:.85rem;color:var(--text-secondary);}
+
+/* Features */
+#features{background:var(--bg-surface);border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle);}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}
+.feature{padding:24px;}
+.feature-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--accent-subtle);color:var(--accent-hover);
+  display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+}
+.feature-icon svg{width:17px;height:17px;}
+.feature h3{font-family:var(--font-display);font-size:.95rem;font-weight:600;margin-bottom:6px;letter-spacing:-.01em;}
+.feature p{font-size:.85rem;color:var(--text-secondary);}
+
+/* Integrations */
+.integrations{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;}
+.integration{
+  padding:18px 16px;text-align:center;
+  font-family:var(--font-display);font-weight:600;font-size:.9rem;
+  color:var(--text-secondary);
+}
+.integration small{display:block;font-family:var(--font-body);font-weight:400;font-size:.72rem;color:var(--text-muted);margin-top:3px;}
+.integration.more{border-style:dashed;color:var(--text-muted);}
+
+/* Pricing */
+#pricing{background:var(--bg-surface);border-top:1px solid var(--border-subtle);}
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;}
+.tier{padding:24px;display:flex;flex-direction:column;position:relative;}
+.tier.featured{border-color:rgba(16,185,129,.45);box-shadow:0 0 16px var(--accent-glow);}
+.tier.featured:hover{border-color:var(--accent);}
+.tier .tag{
+  position:absolute;top:-11px;right:16px;
+  padding:3px 10px;border-radius:999px;
+  background:var(--accent);color:var(--bg-surface);
+  font-size:.66rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+}
+.tier h3{font-family:var(--font-display);font-size:1rem;font-weight:600;letter-spacing:-.01em;}
+.tier .range{font-size:.78rem;color:var(--text-muted);margin-top:2px;}
+.tier .price{font-family:var(--font-mono);font-size:1.9rem;font-weight:600;letter-spacing:-.03em;margin:14px 0 2px;}
+.tier .price span{font-size:.78rem;font-weight:400;color:var(--text-muted);letter-spacing:0;}
+.tier.featured .price{color:var(--accent-hover);}
+.tier .free{font-size:.78rem;font-weight:600;color:var(--accent-hover);}
+.tier .free span{color:var(--text-muted);font-weight:400;}
+.tier .desc{font-size:.82rem;color:var(--text-secondary);margin:12px 0 16px;flex:1;}
+.trial-note{
+  margin-top:20px;padding:14px 18px;border-radius:var(--radius-md);
+  background:var(--accent-subtle);border:1px solid rgba(16,185,129,.2);
+  font-size:.82rem;color:var(--text-secondary);
+}
+.trial-note strong{color:var(--accent-hover);font-weight:600;}
+
+/* CTA band */
+.cta-band{padding:88px 24px;text-align:center;}
+.cta-band h2{
+  font-family:var(--font-display);
+  font-size:clamp(1.7rem,3.4vw,2.4rem);
+  font-weight:700;letter-spacing:-.02em;margin-bottom:14px;
+}
+.cta-band p{color:var(--text-secondary);max-width:480px;margin:0 auto 28px;}
+
+/* Footer */
+footer{border-top:1px solid var(--border-subtle);padding:40px 24px;}
+.footer-inner{
+  max-width:1120px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+}
+footer p{font-size:.8rem;color:var(--text-muted);}
+.foot-links{display:flex;gap:18px;}
+.foot-links a{font-size:.8rem;color:var(--text-muted);text-decoration:none;transition:color .15s;}
+.foot-links a:hover{color:var(--text-primary);}
+
+@media(max-width:860px){
+  .nav-links{display:none;}
+  .steps{grid-template-columns:repeat(2,1fr);}
+  .preview{grid-template-columns:1fr;}
+  .pv-side{display:none;}
+  .pv-stats{grid-template-columns:repeat(2,1fr);}
+  section{padding:64px 20px;}
+  .hero{padding:124px 20px 56px;}
 }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="logo">SplashKing</div>
-  <ul>
-    <li><a href="#packages">Packages</a></li>
-    <li><a href="#info">Location</a></li>
-    <li><a href="#info">Contact</a></li>
-    <li><a href="#book">Book</a></li>
-  </ul>
-  <button class="book-btn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">BOOK NOW</button>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo-lockup" href="#">
+      <span class="logo-mark">
+        <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14.5 7H10.5C8.57 7 7 8.57 7 10.5C7 12.43 8.57 14 10.5 14H13.5C15.43 14 17 15.57 17 17.5C17 19.43 15.43 21 13.5 21H7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 11.5C24 9.5 22 8 19.5 8H18.5M25 20.5C24 22.5 22 24 19.5 24H18.5" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      ShopConnect
+    </a>
+    <ul class="nav-links">
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#integrations">Integrations</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="sc-btn-secondary" href="console.html">Sign in</a>
+      <a class="sc-btn-primary" href="#pricing">Get Started</a>
+    </div>
+  </div>
 </nav>
 
 <!-- HERO -->
 <header class="hero">
-  <div class="bubbles" id="bubbles"></div>
-  <div style="position:relative;z-index:2;padding:0 20px;">
-    <h1>SHINE LIKE<br>ROYALTY</h1>
-    <p class="tagline">★ PREMIUM CAR WASH &nbsp;•&nbsp; LIGHTNING FAST &nbsp;•&nbsp; ECO FRIENDLY ★</p>
-    <div class="cta-row">
-      <button class="book-btn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">BOOK YOUR WASH</button>
-      <button class="ghost-btn" onclick="document.getElementById('packages').scrollIntoView({behavior:'smooth'})">VIEW PACKAGES</button>
+  <div class="hero-inner">
+    <div class="hero-badge animate-in stagger-1"><span class="status-dot"></span>Live across 8+ payment processors</div>
+    <h1 class="animate-in stagger-2">Payments that sync back<br><span class="accent">to your software.</span></h1>
+    <p class="sub animate-in stagger-3">Run card-present and card-not-present payments through the processor of your choice — and watch every transaction write itself back into the software your merchants already use. No double entry, ever.</p>
+    <div class="cta-row animate-in stagger-4">
+      <a class="sc-btn-primary btn-lg" href="#pricing">Get started with ShopConnect</a>
+      <a class="sc-btn-secondary btn-lg" href="console.html">View demo console</a>
     </div>
-  </div>
-  <div class="car-scene">
-    <div class="car">🚗</div>
-    <div class="road"></div>
+    <p class="hero-note animate-in stagger-5">Free to start &middot; No credit card required</p>
+
+    <div class="preview-wrap animate-in stagger-5">
+      <div class="preview-glow"></div>
+      <div class="preview">
+        <div class="pv-side">
+          <span class="logo-lockup"><span class="logo-mark"><svg width="15" height="15" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14.5 7H10.5C8.57 7 7 8.57 7 10.5C7 12.43 8.57 14 10.5 14H13.5C15.43 14 17 15.57 17 17.5C17 19.43 15.43 21 13.5 21H7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 11.5C24 9.5 22 8 19.5 8H18.5M25 20.5C24 22.5 22 24 19.5 24H18.5" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>ShopConnect</span>
+          <div class="pv-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Overview</div>
+          <div class="pv-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14"/></svg>Merchants</div>
+          <div class="pv-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Transactions</div>
+          <div class="pv-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Card Vault</div>
+          <div class="pv-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>Recurring Billing</div>
+          <div class="pv-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Sync Status</div>
+        </div>
+        <div class="pv-main">
+          <div class="pv-title">Overview</div>
+          <div class="pv-stats">
+            <div class="pv-stat"><div class="l">Merchants</div><div class="v">24</div></div>
+            <div class="pv-stat"><div class="l">MTD Volume</div><div class="v">$182,440</div></div>
+            <div class="pv-stat"><div class="l">Approval Rate</div><div class="v">97<em>%</em></div></div>
+            <div class="pv-stat"><div class="l">Booked MRR</div><div class="v">$4,250</div></div>
+          </div>
+          <div class="pv-table">
+            <div class="hd">Live Activity Feed</div>
+            <div class="pv-row"><span>Payment started &middot; Acme Auto Repair</span><span class="mono">$482.19</span><span class="pill ok">writeback complete</span></div>
+            <div class="pv-row"><span>Card presented &middot; Terminal 2</span><span class="mono">$96.00</span><span class="pill ok">approved</span></div>
+            <div class="pv-row"><span>Invoice scraped &middot; QuickBooks</span><span class="mono">$1,240.50</span><span class="pill info">writeback queued</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
 
-<!-- PACKAGES -->
-<section id="packages">
-  <h2 class="section-title">Choose Your Shine</h2>
-  <p class="section-sub">Transparent pricing • No hidden fees • 100% satisfaction guaranteed</p>
-  <div class="packages">
-
-    <div class="pkg">
-      <h3>EXPRESS</h3>
-      <div class="price">$12<span>/wash</span></div>
-      <ul>
-        <li>Exterior foam wash</li>
-        <li>High-pressure rinse</li>
-        <li>Spot-free finish</li>
-        <li>Power air dry</li>
-        <li>10 minute service</li>
-      </ul>
-      <button class="pkg-btn" onclick="selectPkg('Express')">Select Express</button>
+<!-- PROCESSOR STRIP -->
+<div class="strip">
+  <div class="strip-inner reveal">
+    <div class="strip-label">Choose your processor</div>
+    <div class="strip-logos">
+      <span>Dejavoo / iPOSpays</span>
+      <span>Valor PayTech</span>
+      <span>Stripe</span>
+      <span>NMI</span>
+      <span>Maverick / FluidPay</span>
+      <span>Authorize.net</span>
+      <span>Windcave</span>
+      <span>EPX</span>
     </div>
-
-    <div class="pkg">
-      <h3>DELUXE</h3>
-      <div class="price">$22<span>/wash</span></div>
-      <ul>
-        <li>Everything in Express</li>
-        <li>Triple-foam conditioner</li>
-        <li>Tire shine &amp; wheel clean</li>
-        <li>Undercarriage rinse</li>
-        <li>Clear-coat protectant</li>
-        <li>Rain repellent</li>
-      </ul>
-      <button class="pkg-btn" onclick="selectPkg('Deluxe')">Select Deluxe</button>
-    </div>
-
-    <div class="pkg featured">
-      <div class="badge">BEST VALUE</div>
-      <h3>ROYAL</h3>
-      <div class="price">$35<span>/wash</span></div>
-      <ul>
-        <li>Everything in Deluxe</li>
-        <li>Hand-applied carnauba wax</li>
-        <li>Interior vacuum &amp; wipe</li>
-        <li>Dashboard conditioner</li>
-        <li>Window cleaning in &amp; out</li>
-        <li>Air freshener of choice</li>
-        <li>Ceramic spray coating</li>
-      </ul>
-      <button class="pkg-btn" onclick="selectPkg('Royal')">Go Royal</button>
-    </div>
-
-    <div class="pkg">
-      <h3>ULTIMATE</h3>
-      <div class="price">$59<span>/wash</span></div>
-      <ul>
-        <li>Everything in Royal</li>
-        <li>Full interior detail</li>
-        <li>Leather conditioning</li>
-        <li>Engine bay cleaning</li>
-        <li>Headlight restoration</li>
-        <li>Clay bar treatment</li>
-        <li>6-month paint sealant</li>
-      </ul>
-      <button class="pkg-btn" onclick="selectPkg('Ultimate')">Go Ultimate</button>
-    </div>
-
   </div>
-</section>
+</div>
 
-<!-- INFO -->
-<section id="info">
-  <h2 class="section-title">Find &amp; Reach Us</h2>
-  <p class="section-sub">We're open 7 days a week, rain or shine</p>
-  <div class="info-grid">
-    <div class="info-card">
-      <div class="icon">📍</div>
-      <h3>Location</h3>
-      <p>1420 Sparkle Avenue<br>Shinetown, CA 90210<br><br>Right off Exit 42, next to the Shell station</p>
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="eyebrow">How it works</div>
+      <h2 class="section-title">From invoice to writeback, automatically</h2>
+      <p class="section-sub">ShopConnect sits between your merchant's software and their payment processor, so every payment lands in both places.</p>
     </div>
-    <div class="info-card">
-      <div class="icon">📞</div>
-      <h3>Contact</h3>
-      <p>
-        <a href="tel:+15551234567">(555) 123-4567</a><br>
-        <a href="mailto:hello@splashking.com">hello@splashking.com</a><br><br>
-        We respond in under 1 hour!
-      </p>
-    </div>
-    <div class="info-card">
-      <div class="icon">⏰</div>
-      <h3>Hours</h3>
-      <p>Mon – Fri: 7am – 9pm<br>Saturday: 8am – 8pm<br>Sunday: 9am – 6pm<br><br>Holiday hours may vary</p>
+    <div class="steps">
+      <div class="sc-card-static step reveal">
+        <div class="num">01</div>
+        <h3>Invoice scraped</h3>
+        <p>The ShopConnect extension reads the open invoice or work order straight from the merchant's software.</p>
+      </div>
+      <div class="sc-card-static step reveal">
+        <div class="num">02</div>
+        <h3>Payment started</h3>
+        <p>The amount is sent to the merchant's processor — card-present on a terminal or card-not-present online.</p>
+      </div>
+      <div class="sc-card-static step reveal">
+        <div class="num">03</div>
+        <h3>Card presented</h3>
+        <p>The customer taps, dips, or pays a link. Approvals come back in real time with full transaction detail.</p>
+      </div>
+      <div class="sc-card-static step reveal">
+        <div class="num">04</div>
+        <h3>Synced to software</h3>
+        <p>The payment writes back into the invoice automatically. Books stay balanced with zero double entry.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- BOOK -->
-<section id="book">
-  <h2 class="section-title">Book Your Wash</h2>
-  <p class="section-sub">Takes less than 60 seconds</p>
-  <form class="booking-form" onsubmit="event.preventDefault();alert('Thanks! We\\'ll confirm your booking shortly.');">
-    <div class="row">
-      <input type="text" placeholder="Full Name" required>
-      <input type="tel" placeholder="Phone Number" required>
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="eyebrow">Platform</div>
+      <h2 class="section-title">Everything a payment operation needs</h2>
+      <p class="section-sub">One console for merchants, transactions, terminals, and the sync pipeline behind them.</p>
     </div>
-    <div class="row">
-      <input type="email" class="full" placeholder="Email Address" required>
+    <div class="features">
+      <div class="sc-card-static feature reveal">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+        <h3>Card Vault</h3>
+        <p>Card-on-file tokenization through your processor's vault. ShopConnect never touches raw card numbers — only vault tokens and the last four.</p>
+      </div>
+      <div class="sc-card-static feature reveal">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div>
+        <h3>Recurring Billing</h3>
+        <p>Create subscriptions linked to vaulted cards. ShopConnect charges automatically on schedule and tracks MRR, past-due, and retries.</p>
+      </div>
+      <div class="sc-card-static feature reveal">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="18" x2="8" y2="18.01"/><line x1="12" y1="18" x2="12" y2="18.01"/><line x1="16" y1="18" x2="16" y2="18.01"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/></svg></div>
+        <h3>Terminals</h3>
+        <p>Register and monitor countertop terminals across every location — online status, validation, and signature capture settings in one place.</p>
+      </div>
+      <div class="sc-card-static feature reveal">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3>Sync Status &amp; Writebacks</h3>
+        <p>Debug merchant issues with raw payloads and one-click retries. Every writeback is tracked from queued to complete.</p>
+      </div>
+      <div class="sc-card-static feature reveal">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        <h3>Analytics &amp; Reports</h3>
+        <p>Approval rates, card brand mix, decline reasons, and month-over-month volume. Download transaction and merchant data as CSV.</p>
+      </div>
+      <div class="sc-card-static feature reveal">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Reconciliation &amp; Disputes</h3>
+        <p>Daily batches, settlement records, and deposit tracking — plus a full dispute workflow with evidence submission.</p>
+      </div>
     </div>
-    <div class="row">
-      <select id="pkgSelect" required>
-        <option value="">Choose Package</option>
-        <option>Express — $12</option>
-        <option>Deluxe — $22</option>
-        <option>Royal — $35</option>
-        <option>Ultimate — $59</option>
-      </select>
-      <input type="datetime-local" required>
-    </div>
-    <div class="row">
-      <input type="text" class="full" placeholder="Vehicle make &amp; model">
-    </div>
-    <button type="submit">CONFIRM BOOKING</button>
-  </form>
+  </div>
 </section>
+
+<!-- INTEGRATIONS -->
+<section id="integrations">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="eyebrow">Integrations</div>
+      <h2 class="section-title">Works with the software your merchants already use</h2>
+      <p class="section-sub">Browse supported integrations and manage your active connections — or connect any web-based software with the ShopConnect extension.</p>
+    </div>
+    <div class="integrations">
+      <div class="sc-card-static integration reveal">QuickBooks<small>Payments record automatically</small></div>
+      <div class="sc-card-static integration reveal">ShopBoss<small>Auto shop management</small></div>
+      <div class="sc-card-static integration reveal">Odoo<small>Native bridge module</small></div>
+      <div class="sc-card-static integration reveal">Mindbody<small>Studios &amp; wellness</small></div>
+      <div class="sc-card-static integration reveal">GymMaster<small>Gyms &amp; membership</small></div>
+      <div class="sc-card-static integration reveal">JobTread<small>Construction</small></div>
+      <div class="sc-card-static integration more reveal">+ Any web-based software<small>via the Chrome extension</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="eyebrow">Pricing</div>
+      <h2 class="section-title">Partner tiers that scale with you</h2>
+      <p class="section-sub">Free to start on every tier. After your trial, pay the platform fee plus $25/month per active merchant location.</p>
+    </div>
+    <div class="tiers">
+      <div class="sc-card tier reveal">
+        <h3>Starter</h3>
+        <div class="range">0&ndash;2 merchants/mo</div>
+        <div class="price">$0<span>/mo</span></div>
+        <div class="free">Free to start</div>
+        <p class="desc">Perfect for getting started. Board up to 2 merchants per month at no platform cost — ideal for new agents testing the platform.</p>
+        <a class="sc-btn-primary" href="console.html" style="background:transparent;border:1px solid var(--border);color:var(--text-primary);">Start free</a>
+      </div>
+      <div class="sc-card tier featured reveal">
+        <div class="tag">Most popular</div>
+        <h3>Growth</h3>
+        <div class="range">3&ndash;9 merchants/mo</div>
+        <div class="price">$25<span>/mo</span></div>
+        <div class="free">Free to start<span>, then $25/mo</span></div>
+        <p class="desc">For growing payment companies. Full dashboard analytics, sub-agent management, and priority onboarding support.</p>
+        <a class="sc-btn-primary" href="console.html">Get started</a>
+      </div>
+      <div class="sc-card tier reveal">
+        <h3>Scale</h3>
+        <div class="range">10&ndash;15 merchants/mo</div>
+        <div class="price">$50<span>/mo</span></div>
+        <div class="free">Free to start<span>, then $50/mo</span></div>
+        <p class="desc">For established ISOs. Everything in Growth plus a dedicated account manager and custom integration requests.</p>
+        <a class="sc-btn-primary" href="console.html" style="background:transparent;border:1px solid var(--border);color:var(--text-primary);">Get started</a>
+      </div>
+      <div class="sc-card tier reveal">
+        <h3>Enterprise</h3>
+        <div class="range">15+ merchants/mo</div>
+        <div class="price">$75<span>/mo</span></div>
+        <div class="free">Free to start<span>, then $75/mo</span></div>
+        <p class="desc">For large-scale operations. Unlimited merchant boarding, custom SLA, API access, and white-label options.</p>
+        <a class="sc-btn-primary" href="console.html" style="background:transparent;border:1px solid var(--border);color:var(--text-primary);">Contact sales</a>
+      </div>
+    </div>
+    <div class="trial-note reveal">
+      <strong>Free trial:</strong> every tier is free for the first 2 months or 5 merchants boarded, whichever comes first. No credit card required — billing begins only after your trial ends.
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="reveal">
+    <h2>Get started with ShopConnect</h2>
+    <p>Create your account, board your first merchant, and see your first writeback land in minutes.</p>
+    <div class="cta-row">
+      <a class="sc-btn-primary btn-lg" href="console.html">Create your account</a>
+      <a class="sc-btn-secondary btn-lg" href="#how">See how it works</a>
+    </div>
+  </div>
+</div>
 
 <footer>
-  © 2026 SplashKing Car Wash • Crafted with 💧 in Shinetown, CA
+  <div class="footer-inner">
+    <a class="logo-lockup" href="#" style="font-size:.85rem;">
+      <span class="logo-mark" style="width:26px;height:26px;border-radius:7px;">
+        <svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14.5 7H10.5C8.57 7 7 8.57 7 10.5C7 12.43 8.57 14 10.5 14H13.5C15.43 14 17 15.57 17 17.5C17 19.43 15.43 21 13.5 21H7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 11.5C24 9.5 22 8 19.5 8H18.5M25 20.5C24 22.5 22 24 19.5 24H18.5" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      ShopConnect
+    </a>
+    <div class="foot-links">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#integrations">Integrations</a>
+      <a href="#pricing">Pricing</a>
+      <a href="console.html">Console</a>
+    </div>
+    <p>&copy; 2026 ShopConnect &middot; Payments that sync.</p>
+  </div>
 </footer>
 
 <script>
-/* Bubbles */
-const bw=document.getElementById('bubbles');
-for(let i=0;i<25;i++){
-  const b=document.createElement('div');
-  b.className='bubble';
-  const size=8+Math.random()*40;
-  b.style.width=b.style.height=size+'px';
-  b.style.left=Math.random()*100+'%';
-  b.style.animationDuration=(6+Math.random()*10)+'s';
-  b.style.animationDelay=(Math.random()*8)+'s';
-  bw.appendChild(b);
-}
-
-/* Reveal on scroll */
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show');}),{threshold:.15});
-document.querySelectorAll('.pkg').forEach(el=>io.observe(el));
-
-/* Package select */
-function selectPkg(name){
-  const sel=document.getElementById('pkgSelect');
-  for(const o of sel.options){if(o.text.startsWith(name)){sel.value=o.value;break;}}
-  document.getElementById('book').scrollIntoView({behavior:'smooth'});
-}
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);}
+}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
