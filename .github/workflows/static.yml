@@ -1,11 +1,12 @@
-# Publish the site to GitHub Pages via the gh-pages branch.
+# Publish the site to GitHub Pages.
 #
-# The Pages site was disabled on this repo and the Actions token is not
-# allowed to re-create it through the Pages API ("Resource not accessible
-# by integration"), so the artifact-based deploy (configure-pages /
-# deploy-pages) cannot run. Instead, this workflow mirrors the default
-# branch into a gh-pages branch, which GitHub publishes through the
-# branch-based Pages pipeline.
+# Two publish paths run in parallel so the deploy works regardless of which
+# source is selected in Settings -> Pages:
+#   - "deploy" uses the artifact-based Pages API (works when Source is
+#     "GitHub Actions"). It is continue-on-error so a source mismatch
+#     doesn't fail the run.
+#   - "publish-branch" mirrors the tree into the gh-pages branch (works
+#     when Source is "Deploy from a branch" / gh-pages).
 name: Deploy static content to Pages
 
 on:
@@ -18,13 +19,35 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  publish:
+  deploy:
+    continue-on-error: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+  publish-branch:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
